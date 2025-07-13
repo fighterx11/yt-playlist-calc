@@ -45,7 +45,7 @@ const Index = () => {
                 </h1>
                 <div className="flex items-center justify-center gap-2 mb-6">
                   <Sparkles className="h-5 w-5 text-primary animate-pulse" />
-                  <span className="text-lg sm:text-xl font-medium text-primary">Modern Analytics</span>
+                  <span className="text-lg sm:text-xl font-medium text-primary">Playlist Analytics</span>
                   <Sparkles className="h-5 w-5 text-primary animate-pulse" />
                 </div>
               </div>
@@ -53,11 +53,11 @@ const Index = () => {
               {/* Hero Description */}
               <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed" data-gsap="fade-in">
                 Calculate the total watch time of any YouTube playlist with precision and style.
-                Perfect for planning study sessions, binge-watching, or content analysis in a modern interface.
+                Perfect for planning study sessions, binge-watching, or content analysis.
               </p>
 
               {/* Feature Pills */}
-              <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12" data-gsap="stagger">
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12">
                 <div className="flex items-center gap-2 glass px-4 py-3 rounded-full border-glow">
                   <Youtube className="h-4 w-4 sm:h-5 sm:w-5 text-primary glow-primary" />
                   <span className="text-sm sm:text-base font-medium">YouTube Data API</span>
@@ -90,7 +90,7 @@ const Index = () => {
         </section>
 
         {/* Footer */}
-        <footer className="glass border-t border-glow mt-16" data-gsap="fade-in">
+        <footer className="glass border-t border-glow mt-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="text-center">
               <div className="flex items-center justify-center gap-3 mb-4">
@@ -100,7 +100,7 @@ const Index = () => {
                 <span className="text-lg font-semibold gradient-text">Playlist Calculator</span>
               </div>
               <p className="text-muted-foreground mb-2 text-sm sm:text-base">
-                Built with YouTube Data API v3 & Modern Web Technologies
+                Built with YouTube Data API v3
               </p>
               <p className="text-xs sm:text-sm text-muted-foreground opacity-75">
                 This tool respects YouTube's Terms of Service and privacy policies.
