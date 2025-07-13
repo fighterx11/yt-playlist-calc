@@ -6,7 +6,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import LoadingScreen from "@/components/LoadingScreen";
-import ScrollProgress from "@/components/ScrollProgress";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -20,11 +19,11 @@ const App = () => {
   };
 
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="playlist-calculator-theme">
+    <ThemeProvider defaultTheme="system" storageKey="playlist-calculator-theme">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
-          <ScrollProgress />
+
           <Toaster />
           <Sonner />
           <BrowserRouter>

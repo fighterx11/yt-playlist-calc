@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
+import React, { useEffect, useState } from 'react';
 import { Youtube } from 'lucide-react';
 
 interface LoadingScreenProps {
@@ -7,79 +6,74 @@ interface LoadingScreenProps {
 }
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
-  const loadingRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    const tl = gsap.timeline({
-      onComplete: () => {
-        // Fade out loading screen
-        gsap.to(loadingRef.current, {
-          opacity: 0,
-          duration: 0.1,
-          onComplete: onComplete
-        });
+    const duration = 500; // 0.5 seconds
+    const frames = 30; // 30 frames for smooth animation
+    const increment = 100 / frames;
+    const frameTime = duration / frames;
+
+    let currentFrame = 0;
+
+    const animationFrame = () => {
+      currentFrame++;
+      const newProgress = Math.min(currentFrame * increment, 100);
+      setProgress(newProgress);
+
+      if (newProgress < 100) {
+        setTimeout(animationFrame, frameTime);
+      } else {
+        // Fade out and complete
+        setTimeout(() => {
+          setIsVisible(false);
+          setTimeout(onComplete, 150);
+        }, 100);
       }
-    });
+    };
 
-    // Animate logo
-    tl.from(logoRef.current, {
-      scale: 0,
-      rotation: 180,
-      duration: 0.4,
-      ease: "back.out(1.7)"
-    })
-    // Animate text
-    .from(textRef.current, {
-      opacity: 0,
-      y: 30,
-      duration: 0.3,
-      ease: "power2.out"
-    }, "-=0.3")
-    // Animate progress bar
-    .from(progressRef.current, {
-      scaleX: 0,
-      duration: 0.5,
-      ease: "power2.out"
-    }, "-=0.2")
-    // Hold for a moment
-    .to({}, { duration: 0.5 });
-
-    // Glow animation for logo
-    gsap.to(logoRef.current, {
-      filter: "drop-shadow(0 0 30px hsl(217 91% 60% / 0.8))",
-      duration: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: "power2.inOut"
-    });
-
+    // Start animation after a brief delay
+    setTimeout(animationFrame, 50);
   }, [onComplete]);
 
+  if (!isVisible) return null;
+
   return (
-    <div ref={loadingRef} className="loading-screen">
-      <div className="text-center">
-        <div ref={logoRef} className="mb-8 relative">
-          <div className="relative inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-gradient-primary">
-            <Youtube className="w-8 h-8 text-white absolute" />
+    <div className="fixed inset-0 z-50 bg-background flex items-center justify-center">
+      <div className="text-center space-y-6 max-w-sm mx-auto px-6">
+        {/* Logo with glow effect */}
+        <div className="relative mx-auto w-16 h-16">
+          <div className="absolute inset-0 rounded-xl bg-gradient-primary opacity-30 animate-pulse"></div>
+          <div className="relative flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-primary glow-primary">
+            <Youtube className="w-7 h-7 text-white" />
           </div>
         </div>
 
-        <div ref={textRef} className="mb-8">
-          <h1 className="text-2xl font-bold gradient-text mb-2">
+        {/* Title */}
+        <div className="space-y-2">
+          <h1 className="text-xl font-bold gradient-text">
             YouTube Playlist Calculator
           </h1>
-          <p className="text-muted-foreground">Loading...</p>
+          <p className="text-muted-foreground text-sm">
+            Initializing...
+          </p>
         </div>
 
-        <div className="w-64 h-1 bg-muted rounded-full overflow-hidden">
-          <div
-            ref={progressRef}
-            className="h-full bg-gradient-primary origin-left"
-            style={{ transform: 'scaleX(0)' }}
-          />
+        {/* Progress bar */}
+        <div className="w-full space-y-2">
+          <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-primary rounded-full transition-all duration-75 ease-out transform origin-left"
+              style={{
+                width: `${progress}%`,
+                transform: `scaleX(${progress / 100})`
+              }}
+            />
+          </div>
+          <div className="text-xs text-muted-foreground text-center font-medium">
+            {Math.round(progress)}%
+          </div>
         </div>
       </div>
     </div>
