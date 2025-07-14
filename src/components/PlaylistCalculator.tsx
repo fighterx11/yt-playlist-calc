@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Calculator, Clock, Play, Youtube, AlertCircle, CheckCircle, ExternalLink, Hash } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -176,8 +175,6 @@ const PlaylistCalculator = () => {
     setPlaylistData(null);
     setError('');
   };
-
-  const isCalculateEnabled = playlistUrl.trim().length > 0;
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-8">
@@ -402,12 +399,15 @@ const PlaylistCalculator = () => {
                   <p className="text-sm text-muted-foreground line-clamp-2">
                     {playlistData.startVideo.title}
                   </p>
-                  <Button variant="outline" size="sm" asChild className="w-full">
-                    <a href={playlistData.startVideo.url} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Watch on YouTube
-                    </a>
-                  </Button>
+                  <a
+                    href={playlistData.startVideo.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full px-4 py-2 text-sm font-medium rounded-md border border-border bg-background text-foreground hover:bg-muted/50 transition-colors duration-200"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Watch on YouTube
+                  </a>
                 </CardContent>
               </Card>
 
@@ -435,12 +435,15 @@ const PlaylistCalculator = () => {
                   <p className="text-sm text-muted-foreground line-clamp-2">
                     {playlistData.endVideo.title}
                   </p>
-                  <Button variant="outline" size="sm" asChild className="w-full">
-                    <a href={playlistData.endVideo.url} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Watch on YouTube
-                    </a>
-                  </Button>
+                  <a
+                    href={playlistData.endVideo.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full px-4 py-2 text-sm font-medium rounded-md border border-border bg-background text-foreground hover:bg-muted/50 transition-colors duration-200"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Watch on YouTube
+                  </a>
                 </CardContent>
               </Card>
             </div>
