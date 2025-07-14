@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import PlaylistCalculator from '@/components/PlaylistCalculator';
@@ -45,12 +45,12 @@ const Index = () => {
             {/* Hero Section */}
             <section className="text-center space-y-6 py-12">
               <div className="space-y-4">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold gradient-text leading-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold gradient-text leading-[1.1] pb-2">
                   YouTube Playlist
                   <br />
                   Length Calculator
                 </h1>
-                <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed px-4">
                   Calculate the total watch time of any YouTube playlist with precision.
                   Perfect for planning study sessions or content analysis.
                 </p>
@@ -86,8 +86,27 @@ const Index = () => {
         {/* Footer */}
         <footer className="border-t border-border/50 bg-muted/30">
           <div className="container mx-auto px-4 py-8">
-            <div className="text-center text-sm text-muted-foreground">
-              <p>Built with YouTube Data API v3 • Respects YouTube's Terms of Service</p>
+            <div className="flex flex-col items-center gap-4">
+              <div className="flex items-center gap-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  asChild
+                  className="glass border-glow"
+                >
+                  <a
+                    href="https://github.com/fighterx11/yt-playlist-calc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Github className="h-4 w-4 mr-2" />
+                    View on GitHub
+                  </a>
+                </Button>
+              </div>
+              <div className="text-center text-sm text-muted-foreground">
+                <p>Built with YouTube Data API v3 • Respects YouTube's Terms of Service</p>
+              </div>
             </div>
           </div>
         </footer>
